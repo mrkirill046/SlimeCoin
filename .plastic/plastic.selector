@@ -1,0 +1,4 @@
+repository "SlimeCoin@mr_kirill046@cloud"
+  path "/"
+    br "/main"
+    co "/main"
