@@ -12,6 +12,7 @@ public static class GameDataSystem
     {
         public int money;
         public int clickForce;
+        public int upgradeLevel;
     }
 
     private static byte[] GetOrCreateKey()
