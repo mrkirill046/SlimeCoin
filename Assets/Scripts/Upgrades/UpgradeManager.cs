@@ -18,7 +18,7 @@ namespace Upgrades
         {
             GameDataSystem.GameData data = GameDataSystem.LoadData();
 
-            switch (data.upgradeLevel)
+            switch (data.UpgradeLevel)
             {
                 case 0:
                     BuyUpgrade(100, 1);
@@ -90,7 +90,7 @@ namespace Upgrades
         {
             GameDataSystem.GameData data = GameDataSystem.LoadData();
 
-            if (data.money < cost)
+            if (data.Money < cost)
             {
                 Debug.Log("Error, money < lvl cost");
                 return;
@@ -98,15 +98,15 @@ namespace Upgrades
 
             GameDataSystem.GameData newData = new GameDataSystem.GameData
             {
-                upgradeLevel = lvl,
-                money = data.money -= cost,
-                clickForce = lvl + 1
+                UpgradeLevel = lvl,
+                Money = data.Money -= cost,
+                ClickForce = lvl + 1
             };
 
             GameDataSystem.SaveData(newData);
             AddTexture(lvl);
-            uiManager.moneyText.text = GameDataSystem.LoadData().money.ToString();
-            clickSystem.money = GameDataSystem.LoadData().money;
+            uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
+            clickSystem.money = GameDataSystem.LoadData().Money;
         }
 
         private void AddTexture(int textureId)
@@ -120,6 +120,7 @@ namespace Upgrades
             int index = textureId - 1;
 
             positions[index].AddComponent<Image>().sprite = textures[index];
+            positions[index].GetComponent<Image>().raycastTarget = false;
             uiManager.upgradeButton.sprite = buttonTextures[index];
         }
     }

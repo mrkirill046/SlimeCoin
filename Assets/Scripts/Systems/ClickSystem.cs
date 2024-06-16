@@ -16,24 +16,25 @@ namespace Systems
             _uiManager = FindFirstObjectByType<UIManager>();
 
             GameDataSystem.GameData data = GameDataSystem.LoadData();
-            money = data.money;
-            _uiManager.moneyText.text = data.money.ToString();
+            money = data.Money;
+            _uiManager.moneyText.text = data.Money.ToString();
         }
 
         public void ClickMoneyButton()
         {
             GameDataSystem.GameData data = GameDataSystem.LoadData();
 
-            money += data.clickForce;
+            money += data.ClickForce;
             _uiManager.moneyText.text = money.ToString();
 
             StartCoroutine(ClickEffect());
 
             GameDataSystem.GameData newData = new GameDataSystem.GameData
             {
-                money = money,
-                clickForce = data.clickForce,
-                upgradeLevel = data.upgradeLevel
+                Money = money,
+                ClickForce = data.ClickForce,
+                UpgradeLevel = data.UpgradeLevel,
+                ClickUpgradeLevel = data.ClickUpgradeLevel
             };
 
             GameDataSystem.SaveData(newData);

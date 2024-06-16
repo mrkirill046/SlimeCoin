@@ -8,13 +8,14 @@ namespace Systems
     public static class GameDataSystem
     {
         private static readonly string KeyPath = Application.persistentDataPath + "/aes.key";
-        private static readonly string IVPath = Application.persistentDataPath + "/aes.iv";
+        private static readonly string IvPath = Application.persistentDataPath + "/aes.iv";
 
         public class GameData
         {
-            public long money;
-            public int clickForce;
-            public int upgradeLevel;
+            public long Money;
+            public int ClickForce;
+            public int UpgradeLevel;
+            public int ClickUpgradeLevel;
         }
 
         private static byte[] GetOrCreateKey()
@@ -34,30 +35,30 @@ namespace Systems
             }
         }
 
-        private static byte[] GetOrCreateIV()
+        private static byte[] GetOrCreateIv()
         {
-            if (File.Exists(IVPath))
+            if (File.Exists(IvPath))
             {
-                return File.ReadAllBytes(IVPath);
+                return File.ReadAllBytes(IvPath);
             }
             else
             {
                 using (var aesAlg = Aes.Create())
                 {
                     aesAlg.GenerateIV();
-                    File.WriteAllBytes(IVPath, aesAlg.IV);
+                    File.WriteAllBytes(IvPath, aesAlg.IV);
                     return aesAlg.IV;
                 }
             }
         }
 
-        private static readonly byte[] aesKey = GetOrCreateKey();
-        private static readonly byte[] aesIV = GetOrCreateIV();
+        private static readonly byte[] AesKey = GetOrCreateKey();
+        private static readonly byte[] AesIv = GetOrCreateIv();
 
         public static void SaveData(GameData data)
         {
             string json = JsonUtility.ToJson(data);
-            string encryptedJson = EncryptString(json, aesKey, aesIV);
+            string encryptedJson = EncryptString(json, AesKey, AesIv);
             File.WriteAllText(Application.persistentDataPath + "/game.data", encryptedJson);
         }
 
@@ -66,19 +67,19 @@ namespace Systems
             if (File.Exists(Application.persistentDataPath + "/game.data"))
             {
                 string encryptedJson = File.ReadAllText(Application.persistentDataPath + "/game.data");
-                string json = DecryptString(encryptedJson, aesKey, aesIV);
+                string json = DecryptString(encryptedJson, AesKey, AesIv);
                 return JsonUtility.FromJson<GameData>(json);
             }
 
             return null;
         }
 
-        static string EncryptString(string plainText, byte[] Key, byte[] IV)
+        static string EncryptString(string plainText, byte[] key, byte[] iv)
         {
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
                 aesAlg.Mode = CipherMode.CBC;
                 aesAlg.Padding = PaddingMode.PKCS7;
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
@@ -96,13 +97,13 @@ namespace Systems
             }
         }
 
-        static string DecryptString(string cipherText, byte[] Key, byte[] IV)
+        static string DecryptString(string cipherText, byte[] key, byte[] iv)
         {
             byte[] buffer = Convert.FromBase64String(cipherText);
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
                 aesAlg.Mode = CipherMode.CBC;
                 aesAlg.Padding = PaddingMode.PKCS7;
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);

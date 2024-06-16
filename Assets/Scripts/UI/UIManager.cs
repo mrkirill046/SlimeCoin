@@ -10,5 +10,6 @@ namespace UI
         public Image coinButton;
         public Image coinClickEffect;
         public Image upgradeButton;
+        public Image clickUpgradeButton;
     }
 }
