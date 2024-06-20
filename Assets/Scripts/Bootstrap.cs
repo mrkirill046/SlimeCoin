@@ -11,6 +11,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private UpgradeManager upgradeManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private ClickUpgradeManager clickUpgradeManager;
+    [SerializeField] private BeatrixSystem beatrixSystem;
 
     private void Awake()
     {
@@ -26,18 +27,28 @@ public class Bootstrap : MonoBehaviour
 
         if (data == null)
         {
-            GameDataSystem.GameData defaultData = new GameDataSystem.GameData
+            GameDataSystem.SaveData(defaultData =>
             {
-                Money = 0,
-                ClickForce = 1,
-                UpgradeLevel = 0,
-                ClickUpgradeLevel = 0
-            };
-
-            GameDataSystem.SaveData(defaultData);
+                defaultData.Money = 0;
+                defaultData.ClickForce = 1;
+                defaultData.UpgradeLevel = 0;
+                defaultData.ClickUpgradeLevel = 0;
+                defaultData.BeatrixBuying = false;
+            });
         }
 
         if (upgradeManager != null) SetTextures();
+        if (beatrixSystem != null) SetBeatrix();
+    }
+
+    private void SetBeatrix()
+    {
+        if (GameDataSystem.LoadData().BeatrixBuying)
+        {
+            beatrixSystem.beatrixIsBuyingButton.interactable = false;
+            beatrixSystem.bobsShopDefaultSprite.sprite = beatrixSystem.bobsShopIsAvailableSprite;
+            beatrixSystem.beatrixPosition.AddComponent<Image>().sprite = beatrixSystem.beatrixSprite;
+        }
     }
 
     private void SetTextures()
@@ -49,7 +60,7 @@ public class Bootstrap : MonoBehaviour
             Debug.LogWarning("Invalid level: " + data.UpgradeLevel);
             return;
         }
-        
+
         if (data.ClickUpgradeLevel is < 1 or > 7)
         {
             Debug.LogWarning("Invalid clickUpgradeLevel: " + data.ClickUpgradeLevel);
@@ -69,7 +80,7 @@ public class Bootstrap : MonoBehaviour
                 upgradeManager.positions[i].GetComponent<Image>().raycastTarget = false;
             }
         }
-        
+
         for (int i = 0; i < data.ClickUpgradeLevel; i++)
         {
             if (clickUpgradeManager.positions[i].GetComponent<Image>() == null)
@@ -83,7 +94,7 @@ public class Bootstrap : MonoBehaviour
                 clickUpgradeManager.positions[i].GetComponent<Image>().raycastTarget = false;
             }
         }
-        
+
         uiManager.upgradeButton.sprite = upgradeManager.buttonTextures[data.UpgradeLevel - 1];
         uiManager.clickUpgradeButton.sprite = clickUpgradeManager.buttonTextures[data.ClickUpgradeLevel - 1];
     }

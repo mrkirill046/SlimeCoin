@@ -9,10 +9,10 @@ namespace Upgrades
     {
         [SerializeField] private UIManager uiManager;
         [SerializeField] private ClickSystem clickSystem;
-        
+
         public GameObject[] positions;
         public Sprite[] buttonTextures;
-        
+
         public Sprite clickSprite;
 
         public void ClickUpgradeClickButton()
@@ -44,7 +44,7 @@ namespace Upgrades
                     break;
             }
         }
-        
+
         private void BuyUpgrade(long cost, int lvl)
         {
             GameDataSystem.GameData data = GameDataSystem.LoadData();
@@ -55,20 +55,17 @@ namespace Upgrades
                 return;
             }
 
-            GameDataSystem.GameData newData = new GameDataSystem.GameData
+            GameDataSystem.SaveData(newData =>
             {
-                ClickUpgradeLevel = lvl,
-                Money = data.Money -= cost,
-                ClickForce = data.ClickForce,
-                UpgradeLevel = data.UpgradeLevel
-            };
-
-            GameDataSystem.SaveData(newData);
+                newData.ClickUpgradeLevel = lvl;
+                newData.Money = data.Money -= cost;
+            });
+            
             AddTexture(lvl);
             uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
             clickSystem.money = GameDataSystem.LoadData().Money;
         }
-        
+
         private void AddTexture(int textureId)
         {
             if (textureId is < 1 or > 7)

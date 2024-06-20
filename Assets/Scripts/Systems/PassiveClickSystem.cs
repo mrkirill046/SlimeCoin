@@ -8,9 +8,10 @@ namespace Systems
     public class PassiveClickSystem : MonoBehaviour
     {
         [SerializeField] private UIManager uiManager;
-        
+
         private Transform _thisObject;
-        
+        private Coroutine _clickCoroutine;
+
         [SerializeField] private float animationDuration = 1f;
         [SerializeField] private float targetScale = 2f;
 
@@ -18,10 +19,18 @@ namespace Systems
         {
             _thisObject = transform;
             StartCoroutine(StartClickAnimation());
+        }
 
-            if (gameObject.GetComponent<Image>() != null)
+        private void Update()
+        {
+            if (gameObject.GetComponent<Image>() != null && _clickCoroutine == null)
             {
-                StartCoroutine(Click());
+                _clickCoroutine = StartCoroutine(Click());
+            }
+            else if (gameObject.GetComponent<Image>() == null && _clickCoroutine != null)
+            {
+                StopCoroutine(_clickCoroutine);
+                _clickCoroutine = null;
             }
         }
 
@@ -30,15 +39,11 @@ namespace Systems
             while (true)
             {
                 GameDataSystem.GameData data = GameDataSystem.LoadData();
-                GameDataSystem.GameData newData = new GameDataSystem.GameData
+                GameDataSystem.SaveData(newData =>
                 {
-                    Money = data.Money += data.ClickForce,
-                    ClickForce = data.ClickForce,
-                    UpgradeLevel = data.UpgradeLevel,
-                    ClickUpgradeLevel = data.ClickUpgradeLevel
-                };
-
-                GameDataSystem.SaveData(newData);
+                    newData.Money = data.Money + data.ClickForce;
+                });
+                
                 uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
                 yield return new WaitForSeconds(animationDuration * 2);
             }
@@ -48,19 +53,10 @@ namespace Systems
         {
             Vector3 initialScale = _thisObject.localScale;
             Vector3 targetScaleVector = initialScale / targetScale;
-            
+
             while (true)
             {
                 float elapsedTime = 0f;
-                while (elapsedTime < animationDuration)
-                {
-                    _thisObject.localScale = Vector3.Lerp(targetScaleVector, initialScale, elapsedTime / animationDuration);
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-                _thisObject.localScale = initialScale;
-                
-                elapsedTime = 0f;
                 while (elapsedTime < animationDuration)
                 {
                     _thisObject.localScale = Vector3.Lerp(initialScale, targetScaleVector, elapsedTime / animationDuration);
@@ -68,6 +64,15 @@ namespace Systems
                     yield return null;
                 }
                 _thisObject.localScale = targetScaleVector;
+
+                elapsedTime = 0f;
+                while (elapsedTime < animationDuration)
+                {
+                    _thisObject.localScale = Vector3.Lerp(targetScaleVector, initialScale, elapsedTime / animationDuration);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                _thisObject.localScale = initialScale;
             }
         }
     }

@@ -96,14 +96,14 @@ namespace Upgrades
                 return;
             }
 
-            GameDataSystem.GameData newData = new GameDataSystem.GameData
+            GameDataSystem.SaveData(newData =>
             {
-                UpgradeLevel = lvl,
-                Money = data.Money -= cost,
-                ClickForce = lvl + 1
-            };
-
-            GameDataSystem.SaveData(newData);
+                newData.UpgradeLevel = lvl;
+                newData.Money = data.Money -= cost;
+                newData.ClickForce += 1;
+            });
+            
+            PlayerPrefs.SetInt("CurrentClickForce", GameDataSystem.LoadData().ClickForce);
             AddTexture(lvl);
             uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
             clickSystem.money = GameDataSystem.LoadData().Money;

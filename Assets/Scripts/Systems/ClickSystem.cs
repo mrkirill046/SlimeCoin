@@ -29,15 +29,10 @@ namespace Systems
 
             StartCoroutine(ClickEffect());
 
-            GameDataSystem.GameData newData = new GameDataSystem.GameData
+            GameDataSystem.SaveData(newData =>
             {
-                Money = money,
-                ClickForce = data.ClickForce,
-                UpgradeLevel = data.UpgradeLevel,
-                ClickUpgradeLevel = data.ClickUpgradeLevel
-            };
-
-            GameDataSystem.SaveData(newData);
+                newData.Money = money;
+            });
         }
 
         private IEnumerator ClickEffect()

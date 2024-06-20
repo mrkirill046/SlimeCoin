@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ec1032cf49c79d4694de6957ed976c4
+guid: 20e8fdfb6058b3c4cb23446d73b6e8b6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Archivo
+  - Rounds Black
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

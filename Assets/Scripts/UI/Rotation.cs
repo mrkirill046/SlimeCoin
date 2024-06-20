@@ -4,7 +4,7 @@ namespace UI
 {
     public class Rotation : MonoBehaviour
     {
-        [SerializeField] private float rotationSpeed;
+        public float rotationSpeed;
 
         private void LateUpdate()
         {
