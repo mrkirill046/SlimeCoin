@@ -19,6 +19,8 @@ namespace Systems
             public bool BeatrixBuying;
             public int StatueUpgradeLevel;
             public int GardenUpgradeLevel;
+            public int SkinLevel;
+            public int CurrentSkin;
         }
 
         private static byte[] GetOrCreateKey()

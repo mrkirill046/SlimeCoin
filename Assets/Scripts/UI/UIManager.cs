@@ -9,8 +9,16 @@ namespace UI
         public TMP_Text moneyText;
         public Image statueButton;
         public Image coinClickEffect;
+        public Image coinButton;
         public Image upgradeButton;
         public Image clickUpgradeButton;
         public Image gardenButton;
+        public Image bg;
+        public Image textBox;
+
+        public Sprite[] bgs;
+        public Sprite[] coins;
+        public Sprite[] coinEffects;
+        public Sprite[] textBoxes;
     }
 }

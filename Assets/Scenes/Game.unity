@@ -816,6 +816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyRotation: {fileID: 408892550}
   cost: 10000
+  uiManager: {fileID: 0}
+  clickSystem: {fileID: 0}
   boostSprite: {fileID: 21300000, guid: 931a927b517cc18419de4b5b5787ff3c, type: 3}
   superBoostSprite: {fileID: 21300000, guid: d8ad59a30c6b79c43887dac64fca8c5b, type: 3}
   superBoostEffectSprite: {fileID: 21300000, guid: 3616be62bb436f74d9cdbea966bdac1b, type: 3}
@@ -1079,6 +1081,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyRotation: {fileID: 408892550}
   cost: 1000000
+  uiManager: {fileID: 0}
+  clickSystem: {fileID: 0}
   boostSprite: {fileID: 21300000, guid: 931a927b517cc18419de4b5b5787ff3c, type: 3}
   superBoostSprite: {fileID: 21300000, guid: d8ad59a30c6b79c43887dac64fca8c5b, type: 3}
   superBoostEffectSprite: {fileID: 21300000, guid: 3616be62bb436f74d9cdbea966bdac1b, type: 3}
@@ -1951,12 +1955,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675145367}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1901200491}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681787293
 GameObject:
@@ -4408,9 +4412,27 @@ MonoBehaviour:
   moneyText: {fileID: 927650722}
   statueButton: {fileID: 1419480934}
   coinClickEffect: {fileID: 408892548}
+  coinButton: {fileID: 1658005119}
   upgradeButton: {fileID: 1673833244}
   clickUpgradeButton: {fileID: 1356819372}
   gardenButton: {fileID: 1418177369}
+  bg: {fileID: 7625055}
+  textBox: {fileID: 1110935335}
+  bgs:
+  - {fileID: 21300000, guid: f3b7a96baea2a4343b68be60b2c469ac, type: 3}
+  - {fileID: 21300000, guid: 441d7f5b1093d7e4baaae4e2d3301f4b, type: 3}
+  - {fileID: 21300000, guid: 041f4cb5350d6a5438189bc46a9a9ede, type: 3}
+  - {fileID: 21300000, guid: b115f020d44c58c419f52f52112c813a, type: 3}
+  - {fileID: 21300000, guid: 91b0bce27bd9b274e804eb83b0c47fc8, type: 3}
+  coins:
+  - {fileID: 21300000, guid: 2d844ad424fca1542a8a7d6d339d20a6, type: 3}
+  - {fileID: 21300000, guid: e649774d5fff6c94389a0987e1d52364, type: 3}
+  coinEffects:
+  - {fileID: 21300000, guid: ebfa118d9948942429216d50e9c4500b, type: 3}
+  - {fileID: 21300000, guid: c170cd7745adb8141b90488ad8e42184, type: 3}
+  textBoxes:
+  - {fileID: 21300000, guid: 300530ec3d3190d48b25d07806a042e8, type: 3}
+  - {fileID: 21300000, guid: e6078974c746caf4080f7be231211a4d, type: 3}
 --- !u!114 &1497508876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5415,7 +5437,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1640257494}
-  - {fileID: 675145369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1901200492
@@ -5918,6 +5939,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 1497508874}
+  - {fileID: 675145369}
   - {fileID: 1901200491}
   - {fileID: 705507995}
   - {fileID: 1253481052}

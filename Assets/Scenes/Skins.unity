@@ -451,7 +451,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 137943782}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 971868606}
+        m_TargetAssemblyTypeName: Systems.SkinSystem, Assembly-CSharp
+        m_MethodName: BuySkin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &183540853
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 347415250}
+  - component: {fileID: 347415251}
   m_Layer: 5
   m_Name: SILVERCOIN
   m_TagString: Untagged
@@ -909,6 +922,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &347415251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347415249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3928aacacc7740f097e03d3856cc64d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 99999
+  level: 1
+  image: {fileID: 887533880}
+  otherImage: {fileID: 137943782}
+  image2: {fileID: 887533880}
+  otherImage2: {fileID: 137943782}
+  buyingSprite: {fileID: 21300000, guid: 8c320f803e17aa942916ef7201a56c1e, type: 3}
+  eqSprite: {fileID: 21300000, guid: 123179f82d3606f46a892d648a3a58c8, type: 3}
+  coinText: {fileID: 886258954}
 --- !u!1 &388245905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,7 +1776,7 @@ GameObject:
   - component: {fileID: 887533880}
   - component: {fileID: 887533879}
   m_Layer: 5
-  m_Name: BuyOrEq
+  m_Name: BuyOrEq2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1810,7 +1844,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 887533880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 347415251}
+        m_TargetAssemblyTypeName: Systems.SkinSystem, Assembly-CSharp
+        m_MethodName: BuySkin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &887533880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1858,6 +1904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 971868605}
+  - component: {fileID: 971868606}
   m_Layer: 5
   m_Name: GOLDENCOIN
   m_TagString: Untagged
@@ -1888,6 +1935,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &971868606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971868604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3928aacacc7740f097e03d3856cc64d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  level: 0
+  image: {fileID: 137943782}
+  otherImage: {fileID: 887533880}
+  image2: {fileID: 887533880}
+  otherImage2: {fileID: 137943782}
+  buyingSprite: {fileID: 21300000, guid: 8c320f803e17aa942916ef7201a56c1e, type: 3}
+  eqSprite: {fileID: 21300000, guid: 123179f82d3606f46a892d648a3a58c8, type: 3}
+  coinText: {fileID: 1045727033}
 --- !u!1 &1000258020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,6 +2005,9 @@ MonoBehaviour:
   upgradeManager: {fileID: 0}
   uiManager: {fileID: 0}
   clickUpgradeManager: {fileID: 0}
+  statueUpgradeManager: {fileID: 0}
+  gardenUpgradeManager: {fileID: 0}
+  gardenSystem: {fileID: 0}
   beatrixSystem: {fileID: 0}
 --- !u!1 &1045727031
 GameObject:

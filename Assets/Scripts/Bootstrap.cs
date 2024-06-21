@@ -40,9 +40,11 @@ public class Bootstrap : MonoBehaviour
                 defaultData.ClickUpgradeLevel = 0;
                 defaultData.BeatrixBuying = false;
                 defaultData.GardenUpgradeLevel = 0;
+                defaultData.SkinLevel = 0;
+                defaultData.CurrentSkin = 0;
             });
         }
-        
+
         PlayerPrefs.SetInt("CurrentClickForce", GameDataSystem.LoadData().ClickForce);
 
         if (upgradeManager != null) SetTextures();
@@ -148,6 +150,48 @@ public class Bootstrap : MonoBehaviour
             if (data.GardenUpgradeLevel == 2)
             {
                 gardenUpgradeManager.GetComponent<Button>().interactable = false;
+            }
+        }
+    }
+
+    private void Start()
+    {
+        if (upgradeManager != null)
+        {
+            if (GameDataSystem.LoadData().CurrentSkin == 0)
+            {
+                uiManager.coinButton.sprite = uiManager.coins[0];
+                uiManager.coinClickEffect.sprite = uiManager.coinEffects[0];
+                uiManager.textBox.sprite = uiManager.textBoxes[0];
+            }
+            else
+            {
+                uiManager.coinButton.sprite = uiManager.coins[1];
+                uiManager.coinClickEffect.sprite = uiManager.coinEffects[1];
+                uiManager.textBox.sprite = uiManager.textBoxes[1];
+            }
+
+            switch (PlayerPrefs.GetString("BG"))
+            {
+                case "1":
+                    uiManager.bg.sprite = uiManager.bgs[0];
+                    break;
+                case "2":
+                    uiManager.bg.sprite = uiManager.bgs[1];
+                    break;
+                case "3":
+                    uiManager.bg.sprite = uiManager.bgs[2];
+                    break;
+                case "4":
+                    uiManager.bg.sprite = uiManager.bgs[3];
+                    break;
+                case "5":
+                    uiManager.bg.sprite = uiManager.bgs[4];
+                    break;
+                default:
+                    uiManager.bg.sprite = uiManager.bgs[1];
+                    Debug.Log("Error in apply bg");
+                    break;
             }
         }
     }
