@@ -1,7 +1,6 @@
 using System.Collections;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Systems
@@ -10,6 +9,8 @@ namespace Systems
     {
         [SerializeField] private Rotation moneyRotation;
         [SerializeField] private long cost;
+        [SerializeField] private UIManager uiManager;
+        [SerializeField] private ClickSystem clickSystem;
 
         [SerializeField] private Sprite boostSprite;
         [SerializeField] private Sprite superBoostSprite;
@@ -52,7 +53,9 @@ namespace Systems
             else
             {
                 GameDataSystem.SaveData(data => { data.Money -= cost; });
-
+                uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
+                clickSystem.money = GameDataSystem.LoadData().Money;
+                
                 moneyRotation.rotationSpeed *= 4;
                 StartCoroutine(StartBoost(30, 3));
             }

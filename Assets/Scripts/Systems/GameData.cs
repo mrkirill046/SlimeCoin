@@ -17,6 +17,8 @@ namespace Systems
             public int UpgradeLevel;
             public int ClickUpgradeLevel;
             public bool BeatrixBuying;
+            public int StatueUpgradeLevel;
+            public int GardenUpgradeLevel;
         }
 
         private static byte[] GetOrCreateKey()

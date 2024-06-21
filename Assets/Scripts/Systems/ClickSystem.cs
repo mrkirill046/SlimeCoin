@@ -7,6 +7,7 @@ namespace Systems
 {
     public class ClickSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource clickMusic;
         public long money;
 
         private UIManager _uiManager;
@@ -22,6 +23,7 @@ namespace Systems
 
         public void ClickMoneyButton()
         {
+            clickMusic.Play();
             GameDataSystem.GameData data = GameDataSystem.LoadData();
 
             money += data.ClickForce;

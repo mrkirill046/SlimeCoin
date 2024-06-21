@@ -1,4 +1,5 @@
 using System.Collections;
+using Systems;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,18 @@ namespace UI
             StartCoroutine(LoadSceneAsync(sceneName));
         }
 
+        public void ClickBobsShopButton()
+        {
+            if (GameDataSystem.LoadData().BeatrixBuying)
+            {
+                StartCoroutine(LoadSceneAsync("BobsShop"));
+            }
+            else
+            {
+                Debug.Log("Beatrix not buy!");
+            }
+        }
+
         private IEnumerator Out()
         {
             loadingPanel.SetActive(true);
@@ -41,9 +54,7 @@ namespace UI
 
             while (!operation.isDone)
             {
-                float progress = Mathf.Round(operation.progress * 100f);
-                Debug.Log(progress);
-
+                // float progress = Mathf.Round(operation.progress * 100);
                 yield return null;
             }
 

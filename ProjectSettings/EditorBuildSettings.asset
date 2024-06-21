@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HuntersShop.unity
     guid: 8da269c8f3905274fbe7204906e2952b
+  - enabled: 1
+    path: Assets/Scenes/BobsShop.unity
+    guid: 9faae9fa78d64a141817ae3f53e4d17c
   m_configObjects: {}
