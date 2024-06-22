@@ -7,6 +7,8 @@ namespace Upgrades
 {
     public class GardenUpgradeManager : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         public Sprite texture;
         public Sprite[] buttonTextures;
         public GameObject position;
@@ -64,6 +66,8 @@ namespace Upgrades
                 GetComponent<Button>().interactable = false;
             }
 
+            music.Play();
+            
             _gardenSystem.StopAllCoroutines();
             _gardenSystem.StartCoroutine(_gardenSystem.GardenMoney());
             _gardenSystem.Initialize();

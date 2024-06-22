@@ -5,6 +5,8 @@ namespace Systems
 {
     public class BgSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         [SerializeField] private Sprite buyingImage;
         [SerializeField] private int cost;
         [SerializeField] private string bgName;
@@ -25,6 +27,7 @@ namespace Systems
         private void ApplyBg()
         {
             PlayerPrefs.SetString("BG", bgName);
+            music.Play();
         }
 
         public void BuyBg()

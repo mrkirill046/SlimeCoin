@@ -7,6 +7,8 @@ namespace Systems
 {
     public class GardenSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         [SerializeField] private UIManager uiManager;
         [SerializeField] private ClickSystem clickSystem;
         [SerializeField] private Sprite fullMoneySprite;
@@ -40,6 +42,7 @@ namespace Systems
             }
             else
             {
+                music.Play();
                 var data = GameDataSystem.LoadData();
                 switch (data.GardenUpgradeLevel)
                 {

@@ -6,6 +6,8 @@ namespace Systems
 {
     public class SkinSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         [SerializeField] private int cost;
         [SerializeField] private int level;
 
@@ -46,6 +48,7 @@ namespace Systems
 
             image.sprite = eqSprite;
             otherImage.sprite = buyingSprite;
+            music.Play();
         }
 
         public void BuySkin()

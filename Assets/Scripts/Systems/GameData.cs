@@ -21,6 +21,13 @@ namespace Systems
             public int GardenUpgradeLevel;
             public int SkinLevel;
             public int CurrentSkin;
+            public int HenHenChickenMoney;
+            public int StonyHenChickenMoney;
+            public int BriarHenChickenMoney;
+            public int RoostroChickenMoney;
+            public int OneSlime;
+            public int TwoSlime;
+            public int ThreeSlime;
         }
 
         private static byte[] GetOrCreateKey()

@@ -5,6 +5,7 @@ namespace Systems
 {
     public class BeatrixSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
         [SerializeField] private int cost;
 
         public GameObject beatrixPosition;
@@ -25,6 +26,8 @@ namespace Systems
                     data.Money -= cost;
                     data.BeatrixBuying = true;
                 });
+                
+                music.Play();
 
                 PlayerPrefs.SetInt("CurrentClickForce", GameDataSystem.LoadData().ClickForce);
                 beatrixIsBuyingButton.interactable = false;

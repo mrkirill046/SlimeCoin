@@ -6,6 +6,8 @@ namespace Upgrades
 {
     public class StatueUpgradeManager : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         public Sprite[] buttonTextures;
 
         [SerializeField] private UIManager uiManager;
@@ -48,7 +50,7 @@ namespace Upgrades
             GameDataSystem.SaveData(newData =>
             {
                 newData.StatueUpgradeLevel = lvl;
-                newData.Money = data.Money -= cost;
+                newData.Money -= cost;
                 newData.ClickForce += lvl * 100;
             });
             
@@ -56,6 +58,7 @@ namespace Upgrades
             AddTexture(lvl);
             uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
             clickSystem.money = GameDataSystem.LoadData().Money;
+            music.Play();
         }
 
         private void AddTexture(int textureId)

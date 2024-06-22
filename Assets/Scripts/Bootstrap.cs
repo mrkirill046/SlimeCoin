@@ -42,6 +42,13 @@ public class Bootstrap : MonoBehaviour
                 defaultData.GardenUpgradeLevel = 0;
                 defaultData.SkinLevel = 0;
                 defaultData.CurrentSkin = 0;
+                defaultData.HenHenChickenMoney = 0;
+                defaultData.BriarHenChickenMoney = 0;
+                defaultData.StonyHenChickenMoney = 0;
+                defaultData.RoostroChickenMoney = 0;
+                defaultData.OneSlime = 0;
+                defaultData.TwoSlime = 0;
+                defaultData.ThreeSlime = 0;
             });
         }
 
@@ -145,11 +152,13 @@ public class Bootstrap : MonoBehaviour
         }
         else
         {
-            uiManager.gardenButton.sprite = gardenUpgradeManager.buttonTextures[data.GardenUpgradeLevel - 1];
-
             if (data.GardenUpgradeLevel == 2)
             {
                 gardenUpgradeManager.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                uiManager.gardenButton.sprite = gardenUpgradeManager.buttonTextures[data.GardenUpgradeLevel - 1];
             }
         }
     }
@@ -158,6 +167,37 @@ public class Bootstrap : MonoBehaviour
     {
         if (upgradeManager != null)
         {
+            var data = GameDataSystem.LoadData();
+
+            ChickenInfo[] chickenInfos = {
+                new() { Money = data.HenHenChickenMoney, PositionIndex = 0, SpriteIndex = 0 },
+                new() { Money = data.StonyHenChickenMoney, PositionIndex = 1, SpriteIndex = 1 },
+                new() { Money = data.BriarHenChickenMoney, PositionIndex = 2, SpriteIndex = 2 },
+                new() { Money = data.RoostroChickenMoney, PositionIndex = 3, SpriteIndex = 3 }
+            };
+
+            foreach (var chickenInfo in chickenInfos)
+            {
+                if (chickenInfo.Money > 0)
+                {
+                    uiManager.chickenPositions[chickenInfo.PositionIndex].AddComponent<Image>().sprite = uiManager.chickenSprites[chickenInfo.SpriteIndex];
+                }
+            }
+            
+            SlimeInfo[] slimeInfos = {
+                new() { Money = data.OneSlime, PositionIndex = 0, SpriteIndex = 0 },
+                new() { Money = data.TwoSlime, PositionIndex = 1, SpriteIndex = 1 },
+                new() { Money = data.ThreeSlime, PositionIndex = 2, SpriteIndex = 2 }
+            };
+
+            foreach (var slimeInfo in slimeInfos)
+            {
+                if (slimeInfo.Money > 0)
+                {
+                    uiManager.slimePositions[slimeInfo.PositionIndex].AddComponent<Image>().sprite = uiManager.slimeSprites[slimeInfo.SpriteIndex];
+                }
+            }
+            
             if (GameDataSystem.LoadData().CurrentSkin == 0)
             {
                 uiManager.coinButton.sprite = uiManager.coins[0];
@@ -194,5 +234,19 @@ public class Bootstrap : MonoBehaviour
                     break;
             }
         }
+    }
+    
+    private struct ChickenInfo
+    {
+        public int Money;
+        public int PositionIndex;
+        public int SpriteIndex;
+    }
+    
+    private struct SlimeInfo
+    {
+        public int Money;
+        public int PositionIndex;
+        public int SpriteIndex;
     }
 }

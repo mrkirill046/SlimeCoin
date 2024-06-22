@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -8,7 +9,10 @@ namespace UI
 
         private void LateUpdate()
         {
-            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+            if (GetComponent<Image>())
+            {
+                transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }

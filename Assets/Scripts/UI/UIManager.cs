@@ -20,5 +20,11 @@ namespace UI
         public Sprite[] coins;
         public Sprite[] coinEffects;
         public Sprite[] textBoxes;
+
+        public Sprite[] chickenSprites;
+        public Sprite[] slimeSprites;
+        
+        public GameObject[] chickenPositions;
+        public GameObject[] slimePositions;
     }
 }

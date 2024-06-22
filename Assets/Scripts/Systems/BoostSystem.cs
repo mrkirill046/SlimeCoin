@@ -7,6 +7,7 @@ namespace Systems
 {
     public class BoostSystem : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
         [SerializeField] private Rotation moneyRotation;
         [SerializeField] private long cost;
         [SerializeField] private UIManager uiManager;
@@ -38,6 +39,7 @@ namespace Systems
             else
             {
                 GameDataSystem.SaveData(data => { data.Money -= cost; });
+                music.Play();
 
                 moneyRotation.rotationSpeed *= 4;
                 StartCoroutine(StartBoost(30, 2));
@@ -52,6 +54,7 @@ namespace Systems
             }
             else
             {
+                music.Play();
                 GameDataSystem.SaveData(data => { data.Money -= cost; });
                 uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
                 clickSystem.money = GameDataSystem.LoadData().Money;

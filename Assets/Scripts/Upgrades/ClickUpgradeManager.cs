@@ -7,6 +7,8 @@ namespace Upgrades
 {
     public class ClickUpgradeManager : MonoBehaviour
     {
+        [SerializeField] private AudioSource music;
+        
         [SerializeField] private UIManager uiManager;
         [SerializeField] private ClickSystem clickSystem;
 
@@ -64,6 +66,7 @@ namespace Upgrades
             AddTexture(lvl);
             uiManager.moneyText.text = GameDataSystem.LoadData().Money.ToString();
             clickSystem.money = GameDataSystem.LoadData().Money;
+            music.Play();
         }
 
         private void AddTexture(int textureId)
